@@ -49,6 +49,7 @@
     </div>
 
     <script>
+      // 1st
       var clock = document.querySelector(".clock");
 
       setInterval(function () {
@@ -61,13 +62,45 @@
           hour + " : " + minute + " : " + second;
       }, 1000);
 
-      setInterval(changeImg, 2000);
-      var count = 1;
+      // 2st
+      // var clock = document.querySelector(".clock > h2");
 
-      function changeImg() {
+      // function createTime() {
+      //   var date = new Date();
+      //   var hour = date.getHours(); // 시간
+      //   var minute = ("0" + date.getMinutes()).slice(-2); // 분
+      //   var second = ("0" + date.getSeconds()).slice(-2); // 초
+      //   var result =
+      //     (hour < 10 ? "0" + hour : hour) +
+      //     " : " +
+      //     (minute < 10 ? "0" + minute : minute) +
+      //     " : " +
+      //     (second < 10 ? "0" + second : second);
+      //   clock.innerHTML = result;
+      // }
+
+      var count = 0;
+      function createImg() {
+        var data = document.body.dataset.img;
+        var obj = JSON.parse(data);
+
+        // img
         var img = document.createElement("img");
+        img.src = obj[++count];
         img.classList.add("bgImg");
+
+        document.body.appendChild(img);
+
+        // count를 다시 0으로
+        if (Object.keys(obj).length == count) count = 0;
       }
+
+      (function () {
+        createImg(); //
+        setInterval(createImg, 1000);
+        createTime();
+        setInterval(createTime, 1000);
+      })();
     </script>
   </body>
 </html>
